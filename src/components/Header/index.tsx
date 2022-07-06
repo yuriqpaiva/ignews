@@ -1,5 +1,6 @@
 import styles from "./styles.module.scss";
 import Image from "next/image";
+import { SignInButton } from "../SignInButton";
 
 export function Header() {
   return (
@@ -12,6 +13,7 @@ export function Header() {
           </a>
           <a href="">Posts</a>
         </nav>
+        <SignInButton />
       </div>
     </header>
   );
