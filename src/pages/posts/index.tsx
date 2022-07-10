@@ -1,7 +1,22 @@
 import styles from "./styles.module.scss";
 import Head from "next/head";
+import { GetStaticProps } from "next";
+import { getPrismicClient } from "../../services/prismic";
+import * as prismic from "@prismicio/client";
+import { RichText } from "prismic-dom";
 
-export default function Posts() {
+type Post = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  updatedAt: string;
+};
+
+interface PostsProps {
+  posts: Post[];
+}
+
+export default function Posts({ posts }: PostsProps) {
   return (
     <>
       <Head>
@@ -9,40 +24,49 @@ export default function Posts() {
       </Head>
       <main className={styles.container}>
         <div className={styles.posts}>
-          <a href="#">
-            <time>12 de março de 2021</time>
-            <strong>Creating a monorepo with Learn & Yarn Workspaces</strong>
-            <p>
-              in this guide, you will learn how to create a Monorepo to manage
-              multiple packages with a shared...
-            </p>
-          </a>
-          <a>
-            <time>12 de março de 2021</time>
-            <strong>Creating a monorepo with Learn & Yarn Workspaces</strong>
-            <p>
-              in this guide, you will learn how to create a Monorepo to manage
-              multiple packages with a shared...
-            </p>
-          </a>
-          <a>
-            <time>12 de março de 2021</time>
-            <strong>Creating a monorepo with Learn & Yarn Workspaces</strong>
-            <p>
-              in this guide, you will learn how to create a Monorepo to manage
-              multiple packages with a shared...
-            </p>
-          </a>
-          <a>
-            <time>12 de março de 2021</time>
-            <strong>Creating a monorepo with Learn & Yarn Workspaces</strong>
-            <p>
-              in this guide, you will learn how to create a Monorepo to manage
-              multiple packages with a shared...
-            </p>
-          </a>
+          {posts.map((post) => (
+            <a href="#" key={post.slug}>
+              <time>{post.updatedAt}</time>
+              <strong>{post.title}</strong>
+              <p>{post.excerpt}</p>
+            </a>
+          ))}
         </div>
       </main>
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const prismicClient = getPrismicClient();
+
+  const response = await prismicClient.get({
+    // Get publications:
+    predicates: prismic.predicate.at("document.type", "publication"),
+    // Select fields:
+    fetch: ["publication.title", "publication.content"],
+    pageSize: 100,
+    lang: "pt-br",
+  });
+
+  const posts = response.results.map((post) => {
+    return {
+      slug: post.uid,
+      title: RichText.asText(post.data.title),
+      excerpt:
+        post.data.content.find((content: any) => content.type === "paragraph")
+          ?.text ?? "",
+      updatedAt: new Date(post.last_publication_date).toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }),
+    };
+  });
+
+  return {
+    props: {
+      posts,
+    },
+  };
+};
