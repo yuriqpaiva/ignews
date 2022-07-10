@@ -56,6 +56,7 @@ export const getStaticProps: GetStaticProps = async () => {
       excerpt:
         post.data.content.find((content: any) => content.type === "paragraph")
           ?.text ?? "",
+      // Format to PT-BR date extensible
       updatedAt: new Date(post.last_publication_date).toLocaleString("pt-BR", {
         day: "2-digit",
         month: "long",
