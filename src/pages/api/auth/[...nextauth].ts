@@ -5,6 +5,9 @@ import GithubProvider from "next-auth/providers/github";
 import { fauna } from "../../../services/fauna";
 
 export default NextAuth({
+  pages: {
+    signIn: "/api/auth/sigin",
+  },
   // Configure one or more authentication providers
   providers: [
     GithubProvider({
@@ -21,7 +24,6 @@ export default NextAuth({
   callbacks: {
     async session({ session, token, user }) {
       try {
-
         // Getting information about user (if has active subscription or not)
         const userActiveSubscription = await fauna.query(
           q.Get(
