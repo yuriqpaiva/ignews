@@ -17,6 +17,11 @@
 <br>
 
 ## 💡 Introduction
+JAMStack Blog web application
+- See posts preview
+- Authenticate with Github 
+- Subscribe to access full posts contents
+- Access secure payment checkout session with Stripe
 
 <br>
 
