@@ -20,7 +20,7 @@ export function SignInButton() {
     <button
       type="button"
       className={styles.signInButton}
-      onClick={() => signIn("github")}
+      onClick={() => signIn("github", { redirect: false })}
     >
       <FaGithub color="#eba417" />
       Sign in with Github
