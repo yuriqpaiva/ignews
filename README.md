@@ -1,13 +1,11 @@
-<p align="center">
-   <img src="./public/images/logo.svg" alt="Logo Next Level Week Return" width="250px"/>
-</p>
+   <img src="./public/images/logo.svg" alt="Logo Next Level Week Return" width="220px"/>
 
 <p align="center">
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/yuriqpaiva/ignews?color=blueviolet">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/yuriqpaiva/ignews?color=blue">
 
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/yuriqpaiva/ignews?color=blueviolet">
 
-  <img alt="GitHub" src="https://img.shields.io/github/license/yuriqpaiva/ignews?color=blueviolet">
+  <img alt="GitHub" src="https://img.shields.io/github/license/yuriqpaiva/ignews?color=red">
 </p>
 
 <div align="center">
@@ -85,7 +83,7 @@ Check Figma Layout of this project [here](https://www.figma.com/file/R7pfrDaUmD1
 
 ## 📝 License
 
-MIT License © Yuri Paiva. Check [LICENSE](LICENSE.md) for more details
+MIT License © Yuri Paiva. Check [LICENSE](LICENSE) for more details
 
 ---
 
